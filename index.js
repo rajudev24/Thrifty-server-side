@@ -29,7 +29,14 @@ async function run(){
             const services = await cursor.toArray();
             res.send(services)
         });
-
+        //Get API for single product
+        app.get('/services/:id', async(req, res)=>{
+            const id = req.params.id;
+            const query = {_id: ObjectId(id)};
+            const result = await servicesCollection.findOne(query);
+            console.log('Load user by id', result)
+            res.send(result);
+        } );
 
         //POST API for add service
         app.post('/services', async(req, res)=>{
